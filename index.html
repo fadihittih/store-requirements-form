@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>استبيان متطلبات نظام إدارة المحل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5f2; --card:#fff; --ink:#1d2327; --muted:#6b7378; --line:#e4e2dc;
+    --accent:#c2581e; --accent-soft:#fbeee6; --ok:#2f7d4f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;font-size:16px;line-height:1.7}
+  header{background:var(--ink);color:#fff;padding:32px 20px 28px}
+  header .wrap{max-width:760px;margin:0 auto}
+  header h1{margin:0 0 6px;font-size:1.6rem;font-weight:700}
+  header p{margin:0;color:#c9cfd2;font-size:.95rem}
+  .progress{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+  .progress .wrap{max-width:760px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px;font-size:.85rem;color:var(--muted)}
+  .bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+  main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+  .intro{background:var(--accent-soft);border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.95rem}
+  section{scroll-margin-top:50px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;margin-bottom:18px}
+  section h2{margin:0 0 4px;font-size:1.2rem}
+  section .note{color:var(--muted);font-size:.9rem;margin:0 0 6px}
+  .q{padding:16px 0;border-top:1px solid var(--line)}
+  section h2 + .q, section .note + .q{border-top:none}
+  .q label.t{display:block;font-weight:600;margin-bottom:8px}
+  .q label.t .n{color:var(--accent);margin-left:6px}
+  .badge{display:inline-block;font-size:.7rem;font-weight:600;background:var(--accent-soft);color:var(--accent);border-radius:20px;padding:1px 8px;margin-right:6px;vertical-align:middle}
+  textarea,input[type=text],input[type=tel]{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fcfcfb;color:var(--ink)}
+  textarea{min-height:64px;resize:vertical}
+  textarea:focus,input:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip span{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:.92rem;user-select:none;background:#fff}
+  .chip input:checked + span{background:var(--ink);border-color:var(--ink);color:#fff}
+  .chip input:focus-visible + span{outline:2px solid var(--accent)}
+  .matrix{width:100%;border-collapse:collapse;font-size:.92rem}
+  .matrix th,.matrix td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center}
+  .matrix td:first-child,.matrix th:first-child{text-align:right;font-weight:500}
+  .matrix th{font-weight:600;color:var(--muted);font-size:.8rem}
+  .matrix input{width:18px;height:18px;accent-color:var(--accent)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+  .field label{display:block;font-weight:600;margin-bottom:6px;font-size:.92rem}
+  input[type=file]{font:inherit;font-size:.9rem}
+  .submit{text-align:center;margin-top:24px}
+  button{font:inherit;font-weight:600;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:14px 40px;font-size:1.05rem;cursor:pointer}
+  button:disabled{opacity:.6;cursor:wait}
+  .saved{color:var(--muted);font-size:.8rem;margin-top:10px}
+  .hp{display:none}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>استبيان متطلبات نظام إدارة المحل</h1>
+  <p>المخزون · الفواتير · الديون والسداد</p>
+</div></header>
+
+<div class="progress"><div class="wrap">
+  <div class="bar"><i id="bar"></i></div><span id="count">0 / 0</span>
+</div></div>
+
+<main>
+  <div class="intro">
+    هدف هذا الاستبيان أن نفهم طريقة شغلكم بالتفصيل، حتى يطابق النظام عملكم الفعلي.
+    الأسئلة المعلّمة <span class="badge">أساسي</span> هي الأهم. أجيبوا بالتفصيل الذي يناسبكم، ويمكنكم ترك أي سؤال لا تعرفون جوابه.
+    إجاباتكم تُحفظ تلقائيًا على هذا الجهاز، فيمكنكم الإكمال لاحقًا.
+  </div>
+
+  <form id="f" action="https://formsubmit.co/fadihittih@gmail.com" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_subject" id="subj" value="إجابات استبيان نظام محل مواد البناء">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+
+    <section>
+      <h2>بياناتكم</h2>
+      <div class="grid2" style="margin-top:12px">
+        <div class="field"><label for="shop">اسم المحل</label><input type="text" id="shop" data-k="shop"></div>
+        <div class="field"><label for="person">اسم من يعبّئ الاستبيان</label><input type="text" id="person" data-k="person"></div>
+        <div class="field"><label for="phone">رقم الهاتف</label><input type="tel" id="phone" data-k="phone" dir="ltr"></div>
+        <div class="field"><label for="role">صفته في المحل</label><input type="text" id="role" data-k="role" placeholder="المالك، مدير، محاسب…"></div>
+      </div>
+    </section>
+
+    <div id="sections"></div>
+
+    <section>
+      <h2>مرفقات (اختياري)</h2>
+      <p class="note">صورة لفاتورتكم الحالية أو لورقة/دفتر الديون تساعدنا كثيرًا.</p>
+      <input type="file" name="attachment" accept="image/*,.pdf">
+    </section>
+
+    <div id="hidden"></div>
+
+    <div class="submit">
+      <button type="submit" id="btn">إرسال الإجابات</button>
+      <div class="saved" id="saved"></div>
+    </div>
+  </form>
+</main>
+
+<script>
+const YN = ["نعم","لا"];
+const S = [
+ {t:"1. معلومات عامة عن المحل", q:[
+  {k:true,t:"ما الأصناف الرئيسية التي تبيعونها؟",o:["إسمنت","حديد","رمل وحصمة","بلوك وطوب","بلاط وسيراميك","دهانات","أدوات صحية","كهربائيات","عدد وأدوات"],m:1},
+  {k:true,t:"كم صنفًا مختلفًا لديكم تقريبًا؟",o:["أقل من 100","100 – 500","500 – 2000","أكثر من 2000"]},
+  {t:"كم فاتورة بيع في اليوم تقريبًا؟ وكم فاتورة شراء في الشهر؟"},
+  {k:true,t:"صِف يوم عمل عاديًا: من لحظة دخول الزبون حتى استلامه البضاعة والدفع.",long:1},
+  {t:"من يكتب الفاتورة؟ ومن يسلّم البضاعة؟ ومن يستلم المال؟"},
+  {t:"كيف تسجّلون حاليًا؟ وإن جرّبتم برنامجًا سابقًا، لماذا لم يناسبكم؟",o:["دفتر وورق","Excel","برنامج محاسبة"],m:1},
+  {t:"هل لديكم فرع آخر أو نية لفتح فرع؟",o:["نعم","لا","ربما مستقبلًا"]},
+  {k:true,t:"لو حلّ النظام مشكلة واحدة فقط، ما هي؟"}
+ ]},
+ {t:"2. المستخدمون والصلاحيات", q:[
+  {k:true,t:"كم شخصًا سيستخدم النظام؟ ومن هم؟",o:["المالك","محاسب","كاشير / بائع","أمين مخزن"],m:1},
+  {k:true,t:"ما المسموح لكل واحد؟ مثلًا: هل يرى الموظف سعر الشراء والأرباح؟ هل يعدّل أو يحذف فاتورة؟ هل يعطي خصمًا، وإلى أي حد؟",long:1},
+  {t:"هل يريد المالك متابعة المحل من هاتفه وهو خارجه؟",o:YN},
+  {t:"هل تريدون سجلًا يوضح من عدّل ماذا ومتى؟",o:YN},
+  {t:"هل يرى أمين كل مخزن مخزنه فقط؟",o:YN}
+ ]},
+ {t:"3. المخازن والأصناف", q:[
+  {k:true,t:"أين يقع المخزنان (بجانب المحل أم بعيدًا)؟ وهل في المعرض نفسه بضاعة تُحسب كمخزن ثالث؟"},
+  {k:true,t:"هل يوجد الصنف نفسه في المخزنين، وتريدون معرفة كميته في كل مخزن على حدة؟",o:YN},
+  {k:true,t:"كيف تُنقل البضاعة بين المخزنين؟ ومن يسجّل النقل؟"},
+  {k:true,t:"هل يُشترى الصنف بوحدة ويُباع بأخرى؟ (الإسمنت بالطن وبالكيس، الحديد بالطن وبالقضيب، الرمل بالنقلة…) اذكروا أمثلة.",long:1},
+  {t:"هل لبعض الأصناف مقاسات أو أنواع أو ألوان؟ (حديد 8 و10 و12 ملم، بلاط بألوان…)",o:YN},
+  {t:"الباركود:",o:["نستخدمه","نحتاجه","لا نحتاجه"]},
+  {k:true,t:"هل تريدون تنبيهًا عندما يقترب صنف من النفاد؟",o:YN},
+  {t:"كيف تتعاملون مع التالف والكسر والفاقد؟"},
+  {t:"هل تُجرون جردًا دوريًا؟ كل كم؟ وكيف تعالجون الفرق بين الجرد والمسجّل؟"},
+  {k:true,t:"الأسعار: هل تتغير كثيرًا؟ ومن يعدّلها؟",o:["سعر جملة وسعر مفرّق","أسعار خاصة لبعض الزبائن (مقاولين)","سعر واحد للجميع"],m:1},
+  {t:"إذا اشتريتم الصنف نفسه بأسعار مختلفة، كيف تحسبون تكلفته؟",o:["آخر سعر شراء","متوسط الأسعار","لا أعرف"]}
+ ]},
+ {t:"4. المشتريات والموردون", q:[
+  {k:true,t:"كم موردًا تتعاملون معه تقريبًا؟"},
+  {k:true,t:"هل تشترون من الموردين بالدين، وتريدون متابعة ما عليكم لكل مورد؟",o:YN},
+  {t:"كيف تُستلم البضاعة؟ هل تأتي فاتورة المورد معها؟ ومن يتأكد من الكمية؟ وإلى أي مخزن تدخل؟"},
+  {t:"هل توجد مرتجعات للمورد؟",o:YN},
+  {t:"هل توجد مصاريف على الشراء (نقل، تنزيل) تريدون إضافتها إلى تكلفة البضاعة؟",o:YN}
+ ]},
+ {t:"5. المبيعات والفواتير", q:[
+  {k:true,t:"ما طرق البيع لديكم؟",o:["نقدي","بالدين","جزء نقدي وجزء دين","شيكات","تحويل / CliQ"],m:1},
+  {k:true,t:"ماذا يجب أن يظهر على الفاتورة؟ (اسم المحل وشعاره، الرقم الضريبي، اسم الزبون وهاتفه، موقع التوصيل…)",long:1},
+  {k:true,t:"الوضع الضريبي:",o:["مسجّل في ضريبة المبيعات","مطالب بالربط مع جوفوترة","غير مسجّل","لا أعرف"],m:1},
+  {t:"هل تعطون عروض أسعار قبل البيع، ثم تتحول إلى فاتورة؟",o:YN},
+  {k:true,t:"التوصيل: هل توصلون بسيارات المحل؟ هل توجد أجرة توصيل على الفاتورة؟ هل تريدون متابعة حالة الطلبية (سُلّمت / لم تُسلّم)؟",long:1},
+  {k:true,t:"هل يدفع الزبون ثمن كمية ويستلمها على دفعات حسب تقدّم البناء؟",o:YN},
+  {k:true,t:"كيف تتم مرتجعات الزبون؟ هل يُرد المبلغ نقدًا أم يُخصم من دينه؟"},
+  {t:"الخصم: على الصنف أم على الفاتورة كاملة؟ ومن يُسمح له به؟"},
+  {k:true,t:"من أي مخزن تخرج البضاعة عند البيع؟ هل يختار البائع المخزن أم يوجد مخزن افتراضي؟"},
+  {t:"هل يُسمح بالبيع إذا كانت كمية الصنف في النظام صفرًا؟",o:YN},
+  {t:"كيف تريدون إرسال الفاتورة للزبون؟",o:["واتساب","ملف PDF","الطباعة تكفي"],m:1}
+ ]},
+ {t:"6. الديون والسداد", note:"هذا أهم قسم بالنسبة لنا، لأنه المشكلة التي ذكرتموها: السداد يُسجّل على ورقة والورقة تضيع.", q:[
+  {k:true,t:"كم زبونًا عليه دين حاليًا تقريبًا؟ ومن هم؟",o:["مقاولون","أفراد","شركات"],m:1},
+  {k:true,t:"صِف آخر مرة سدّد فيها زبون: من استلم المبلغ؟ أين سُجّل؟ وكيف عرفتم المتبقي؟",long:1},
+  {k:true,t:"كيف تتابعون الدين؟",o:["كل سداد مرتبط بفاتورة محددة","رصيد واحد للزبون (كشف حساب)","لا أعرف"]},
+  {k:true,t:"طرق السداد (وإن كانت لديكم شيكات مؤجلة، هل تريدون متابعة تواريخ استحقاقها والمرتجع منها؟)",o:["نقدًا","شيكات","تحويل / CliQ"],m:1},
+  {k:true,t:"هل تريدون سند قبض يُطبع أو يُرسل للزبون مع كل سداد، يبيّن المدفوع والمتبقي؟",o:YN},
+  {t:"سقف الدين لكل زبون:",o:["يمنع البيع عند تجاوزه","تنبيه فقط","لا يوجد سقف"]},
+  {t:"هل توجد مدة سداد متفق عليها؟ وهل تريدون قائمة بالمتأخرين؟"},
+  {t:"هل تريدون إرسال كشف حساب للزبون (واتساب أو مطبوع)؟",o:YN},
+  {k:true,t:"الديون الموجودة الآن على الورق: هل هي مؤكدة؟ ومن سيحدد المبالغ لإدخالها كرصيد افتتاحي لكل زبون؟"},
+  {t:"هل يدفع بعض الزبائن مقدمًا فيصير لهم رصيد عندكم؟",o:YN},
+  {k:true,t:"من يُسمح له بتسجيل سداد؟ ومن يُسمح له بتعديله أو إلغائه؟"}
+ ]},
+ {t:"7. العمال", note:"نريد أن نفهم هل تحتاجون إدارة شؤون العمال داخل النظام، أم يكفي أن يكونوا مستخدمين له.", q:[
+  {k:true,t:"كم عاملًا لديكم؟ وما أدوارهم؟",o:["تحميل","سائقون","بائعون","أمناء مخازن"],m:1},
+  {k:true,t:"ماذا تريدون أن يدير النظام بخصوص العمال؟",o:["حضور وانصراف","رواتب","أجور يومية","سلف","لا شيء"],m:1},
+  {t:"هل يأخذ العمال سلفًا من الصندوق، وتريدون خصمها من الراتب؟",o:YN},
+  {t:"هل يأخذ البائع عمولة على المبيعات؟",o:YN},
+  {t:"هل تريدون معرفة العامل أو السائق الذي سلّم كل طلبية؟",o:YN}
+ ]},
+ {t:"8. التقارير", q:[
+  {k:true,t:"ما أول شيء تريد رؤيته آخر كل يوم؟ (مبيعات اليوم، النقد في الصندوق، المحصّل من الديون…)"},
+  {k:true,t:"أي التقارير تحتاجون؟",o:["الديون: من عليه وكم ومنذ متى","المخزون في كل مخزن","الأصناف القريبة من النفاد","الأرباح","الأكثر والأقل مبيعًا","حركة صنف معيّن","إغلاق الصندوق اليومي"],m:1},
+  {t:"هل تحتاجون تصدير التقارير؟ وهل يوجد محاسب خارجي يحتاج البيانات؟",o:["Excel","PDF","لا نحتاج"],m:1}
+ ]},
+ {t:"9. الأجهزة والبيانات الحالية", q:[
+  {k:true,t:"ما الأجهزة الموجودة؟ وهل الإنترنت مستقر في المحل والمخازن؟",o:["كمبيوتر","لابتوب","تابلت","هواتف"],m:1},
+  {k:true,t:"إذا انقطع الإنترنت، هل يُقبل أن يتوقف البيع مؤقتًا، أم تحتاجون حلًا احتياطيًا (راوتر بشريحة، هاتف)؟"},
+  {k:true,t:"الطباعة:",o:["ورق A4","طابعة إيصالات حرارية","لا توجد طابعة"],m:1},
+  {k:true,t:"ما البيانات الموجودة حاليًا؟ وبأي شكل (ورق، Excel)؟",o:["قائمة الأصناف","الأسعار","الزبائن وديونهم","الكميات الحالية"],m:1},
+  {t:"هل تريدون رابطًا (دومين) باسم المحل؟",o:YN},
+  {t:"ما الذي تتوقعونه من التدريب على النظام بعد التسليم؟"}
+ ]},
+ {t:"10. الأولويات", note:"سنبدأ بنسخة أولى فيها الأهم، ثم نضيف الباقي على مراحل.", q:[
+  {k:true,matrix:["الديون والسداد","الفواتير","المخزون في المخزنين","المشتريات والموردون","العمال","التوصيل","التقارير"],cols:["ضروري من أول يوم","مهم لاحقًا","غير مهم"],t:"حدّدوا أهمية كل جزء:"},
+  {t:"متى تريدون البدء باستخدام النظام؟"},
+  {k:true,t:"من الشخص الذي نرجع إليه بالأسئلة ويعتمد الشاشات والتسليم؟"}
+ ]}
+];
+
+const root = document.getElementById("sections");
+let qs = [];
+S.forEach((sec,si)=>{
+  const el = document.createElement("section");
+  el.innerHTML = `<h2>${sec.t}</h2>` + (sec.note?`<p class="note">${sec.note}</p>`:"");
+  sec.q.forEach((q,qi)=>{
+    const id = `q${si+1}_${qi+1}`, num = `${si+1}.${qi+1}`;
+    q.id=id; q.num=num; qs.push(q);
+    const d = document.createElement("div"); d.className="q";
+    let h = `<label class="t" for="${id}_txt"><span class="n">${num}</span>${q.t}${q.k?'<span class="badge">أساسي</span>':''}</label>`;
+    if(q.matrix){
+      h += `<table class="matrix"><tr><th></th>${q.cols.map(c=>`<th>${c}</th>`).join("")}</tr>`+
+        q.matrix.map((r,ri)=>`<tr><td>${r}</td>${q.cols.map((c,ci)=>`<td><input type="radio" name="${id}_r${ri}" value="${c}" data-k="${id}_r${ri}" aria-label="${r}: ${c}"></td>`).join("")}</tr>`).join("")+`</table>`;
+    } else {
+      if(q.o) h += `<div class="chips">`+q.o.map((o,oi)=>`<label class="chip"><input type="${q.m?'checkbox':'radio'}" name="${id}_o" value="${o}" data-k="${id}_o${oi}"><span>${o}</span></label>`).join("")+`</div>`;
+      h += `<textarea id="${id}_txt" data-k="${id}_txt" placeholder="${q.o?'تفاصيل أو ملاحظات (اختياري)':'اكتب الإجابة هنا'}" ${q.long?'style="min-height:110px"':''}></textarea>`;
+    }
+    d.innerHTML = h; el.appendChild(d);
+  });
+  root.appendChild(el);
+});
+
+function answerOf(q){
+  if(q.matrix){
+    return q.matrix.map((r,ri)=>{const c=document.querySelector(`input[name="${q.id}_r${ri}"]:checked`);return c?`${r}: ${c.value}`:""}).filter(Boolean).join(" | ");
+  }
+  const picks=[...document.querySelectorAll(`input[name="${q.id}_o"]:checked`)].map(i=>i.value);
+  const txt=document.getElementById(q.id+"_txt").value.trim();
+  return [picks.join("، "),txt].filter(Boolean).join(" — ");
+}
+
+const bar=document.getElementById("bar"), count=document.getElementById("count");
+function progress(){
+  const n=qs.filter(q=>answerOf(q)).length;
+  bar.style.width=(n/qs.length*100)+"%"; count.textContent=`${n} / ${qs.length}`;
+}
+
+const KEY="erp-form-draft-v1";
+function save(){
+  const data={};
+  document.querySelectorAll("[data-k]").forEach(el=>{
+    data[el.dataset.k]=(el.type==="checkbox"||el.type==="radio")?el.checked:el.value;
+  });
+  try{localStorage.setItem(KEY,JSON.stringify(data));document.getElementById("saved").textContent="تم حفظ المسودة على هذا الجهاز";}catch(e){}
+}
+function load(){
+  let data; try{data=JSON.parse(localStorage.getItem(KEY)||"null");}catch(e){}
+  if(!data) return;
+  document.querySelectorAll("[data-k]").forEach(el=>{
+    const v=data[el.dataset.k]; if(v===undefined) return;
+    if(el.type==="checkbox"||el.type==="radio") el.checked=v; else el.value=v;
+  });
+}
+load(); progress();
+document.getElementById("f").addEventListener("input",()=>{progress();save();});
+document.getElementById("f").addEventListener("change",()=>{progress();save();});
+
+document.getElementById("f").addEventListener("submit",e=>{
+  const answered=qs.filter(q=>answerOf(q)).length;
+  if(answered===0){e.preventDefault();alertBox("الرجاء الإجابة على بعض الأسئلة قبل الإرسال.");return;}
+  const hid=document.getElementById("hidden"); hid.innerHTML="";
+  const add=(name,val)=>{const i=document.createElement("input");i.type="hidden";i.name=name;i.value=val||"—";hid.appendChild(i);};
+  add("اسم المحل",document.getElementById("shop").value);
+  add("الاسم",document.getElementById("person").value);
+  add("الهاتف",document.getElementById("phone").value);
+  add("الصفة",document.getElementById("role").value);
+  qs.forEach(q=>add(`${q.num} ${q.t}`,answerOf(q)));
+  const shop=document.getElementById("shop").value.trim();
+  if(shop) document.getElementById("subj").value="إجابات استبيان النظام — "+shop;
+  // keep only the hidden summary fields in the submission
+  document.querySelectorAll("#sections input, #sections textarea, .grid2 input").forEach(el=>el.disabled=true);
+  document.getElementById("btn").disabled=true;
+  document.getElementById("btn").textContent="جاري الإرسال…";
+  try{localStorage.removeItem(KEY);}catch(e){}
+});
+
+window.addEventListener("pageshow",()=>{
+  document.querySelectorAll("#sections input, #sections textarea, .grid2 input").forEach(el=>el.disabled=false);
+  const b=document.getElementById("btn"); b.disabled=false; b.textContent="إرسال الإجابات";
+});
+
+function alertBox(msg){
+  const s=document.getElementById("saved"); s.style.color="var(--accent)"; s.textContent=msg;
+}
+</script>
+</body>
+</html>
