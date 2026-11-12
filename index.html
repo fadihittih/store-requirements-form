@@ -211,7 +211,7 @@ S.forEach((sec,si)=>{
     let h = `<label class="t" for="${id}_txt"><span class="n">${num}</span>${q.t}${q.k?'<span class="badge">أساسي</span>':''}</label>`;
     if(q.matrix){
       h += `<table class="matrix"><tr><th></th>${q.cols.map(c=>`<th>${c}</th>`).join("")}</tr>`+
-        q.matrix.map((r,ri)=>`<tr><td>${r}</td>${q.cols.map((c,ci)=>`<td><input type="radio" name="${id}_r${ri}" value="${c}" data-k="${id}_r${ri}" aria-label="${r}: ${c}"></td>`).join("")}</tr>`).join("")+`</table>`;
+        q.matrix.map((r,ri)=>`<tr><td>${r}</td>${q.cols.map((c,ci)=>`<td><input type="radio" name="${id}_r${ri}" value="${c}" data-k="${id}_r${ri}_c${ci}" aria-label="${r}: ${c}"></td>`).join("")}</tr>`).join("")+`</table>`;
     } else {
       if(q.o) h += `<div class="chips">`+q.o.map((o,oi)=>`<label class="chip"><input type="${q.m?'checkbox':'radio'}" name="${id}_o" value="${o}" data-k="${id}_o${oi}"><span>${o}</span></label>`).join("")+`</div>`;
       h += `<textarea id="${id}_txt" data-k="${id}_txt" placeholder="${q.o?'تفاصيل أو ملاحظات (اختياري)':'اكتب الإجابة هنا'}" ${q.long?'style="min-height:110px"':''}></textarea>`;
@@ -272,7 +272,6 @@ document.getElementById("f").addEventListener("submit",e=>{
   document.querySelectorAll("#sections input, #sections textarea, .grid2 input").forEach(el=>el.disabled=true);
   document.getElementById("btn").disabled=true;
   document.getElementById("btn").textContent="جاري الإرسال…";
-  try{localStorage.removeItem(KEY);}catch(e){}
 });
 
 window.addEventListener("pageshow",()=>{
